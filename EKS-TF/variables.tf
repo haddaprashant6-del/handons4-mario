@@ -13,7 +13,7 @@ variable "aws_region" {
 variable "eks_version" {
   description = "EKS Kubernetes version"
   type        = string
-  default     = "1.33"
+  default     = "1.30"
 }
 
 variable "node_group_name" {
