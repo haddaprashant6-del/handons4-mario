@@ -1,4 +1,4 @@
-name: 🎮 Super Mario — EKS Deployment via Terraform cli
+name: 🎮 Super Mario — EKS Deployment via Terraform cli test
 
 on:
   push:
