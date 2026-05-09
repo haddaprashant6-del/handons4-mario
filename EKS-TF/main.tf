@@ -239,37 +239,33 @@ resource "aws_iam_openid_connect_provider" "eks_oidc_provider" {
 }
 
 # IAM Role for AWS Load Balancer Controller
-resource "aws_iam_role" "lb_controller_role" {
-  name = "aws-load-balancer-controller"
+#resource "aws_iam_role" "lb_controller_role" {
+#  name = "aws-load-balancer-controller"
 
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Principal = {
-          Federated = aws_iam_openid_connect_provider.eks_oidc_provider.arn
-        }
-        Action = "sts:AssumeRoleWithWebIdentity"
-        Condition = {
-          StringEquals = {
-            "${replace(aws_iam_openid_connect_provider.eks_oidc_provider.url, "https://", "")}:sub" = "system:serviceaccount:kube-system:aws-load-balancer-controller"
-          }
-        }
-      }
-    ]
-  })
-
-  tags = {
-    Project     = var.project_name
-    Environment = var.environment
-    ManagedBy   = "Terraform"
-  }
-}
+ # assume_role_policy = jsonencode({
+  #  Version = "2012-10-17"
+   # Statement = [
+    ###  Principal = {
+       ###ction = "sts:AssumeRoleWithWebIdentity"
+        #Condition = {
+         # StringEquals = {
+          #  "${replace(aws_iam_openid_connect_provider.eks_oidc_provider.url, "https://", "")}:sub" = "system:serviceaccount:kube-system:aws-load-balancer-controller"
+          #}
+        #}
+      #}
+    #]
+  #}#)
+#
+ # tags = {
+  #  Project     = var.project_name
+   # Environment = var.environment
+    #ManagedBy   = "Terraform"
+  #}
+#}
 
 # Policy for AWS Load Balancer Controller
-resource "aws_iam_role_policy_attachment" "lb_controller_policy" {
-  policy_arn = "arn:aws:iam::aws:policy/AWSLoadBalancerControllerIAMPolicy"
+#resource "aws_iam_role_policy_attachment" "lb_controller_policy" {
+#  policy_arn = "arn:aws:iam::aws:policy/AWSLoadBalancerControllerIAMPolicy"
   #policy_arn = aws_iam_policy.aws_load_balancer_controller.arn
-  role       = aws_iam_role.lb_controller_role.name
-}
+ # role       = aws_iam_role.lb_controller_role.name
+#}
